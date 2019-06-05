@@ -1,5 +1,71 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MovieList.Views.MovieInfoPage">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieList.Views.MovieInfoPage"
+             IsBusy="{Binding IsBusy}"
+             Title="{Binding Title}">
     <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid Padding="10,20,10,5" IsVisible="{Binding IsNotBusy}" RowSpacing="5" ColumnSpacing="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="6.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="2" Source="{Binding Info.Poster}"
+                            HorizontalOptions="CenterAndExpand"
+                            HeightRequest="250"
+                            WidthRequest="220"
+                            Aspect="AspectFit"/>
+                    
+                    <Label Grid.Row="1" Grid.ColumnSpan="2" LineBreakMode="WordWrap" StyleClass="InfoTitleLabel" 
+                           Text="{Binding Info.Title}"/>
+                   
+                    
+                    <Label Grid.Row="2" Grid.Column="0" StyleClass="InfotagLabel" Text="Year"/>
+                    <Label Grid.Row="2" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.Year}"/>
+                    
+                    <Label Grid.Row="3" Grid.Column="0" StyleClass="InfotagLabel" Text="Genre"/>
+                    <Label Grid.Row="3" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.Genre}"/>
+                    
+                    
+                    <Label Grid.Row="4" Grid.Column="0" StyleClass="InfotagLabel" Text="Rated"/>
+                    <Label Grid.Row="4" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.Rated}"/>
+           
+                    <Label Grid.Row="5" Grid.Column="0" StyleClass="InfotagLabel" Text="Director"/>
+                    <Label Grid.Row="5" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.Director}"/>
+                    
+                    <Label Grid.Row="6" Grid.Column="0" StyleClass="InfotagLabel" Text="Actors"/>
+                    <Label Grid.Row="6" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.Actors}"/>
+                    
+                    <Label Grid.Row="7" Grid.Column="0" StyleClass="InfotagLabel" Text="imdb Rating"/>
+                    <Label Grid.Row="7" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.imdbRating}"/>
+                    
+                    <Label Grid.Row="8" Grid.Column="0" StyleClass="InfotagLabel" Text="Metascore"/>
+                    <Label Grid.Row="8" Grid.Column="1" StyleClass="InfoLabel" Text="{Binding Info.Metascore}"/>
+                     
+                    <StackLayout Grid.Row="9" VerticalOptions="StartAndExpand" Padding="15,5,10,5" Grid.ColumnSpan="2">
+                        <Label StyleClass="InfotagLabel" Margin="10,0,0,0" HorizontalTextAlignment="Start" Text="Plot"/>
+                        <Label LineBreakMode="WordWrap" Margin="5" StyleClass="InfoLabel" Text="{Binding Info.Plot}"/>
+                    </StackLayout>
+                </Grid>
+                <ActivityIndicator HeightRequest="40"
+                               Color="{StaticResource LoadingColor}"
+                               IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                               IsVisible="{Binding IsBusy}"/>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,54 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MovieList.Views.MovieListPage">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MovieList.Views.MovieListPage"
+             Visual="Material" 
+             IsBusy="{Binding IsBusy}"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reload" Command="{Binding LoadDataCommand}" IsEnabled="{Binding IsNotBusy}" Priority="1"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        <Grid Padding="5,10,10,0" RowSpacing="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Entry Grid.Row="0" Margin="10,0" 
+                   Text="{Binding SearchParam}"
+                   BackgroundColor="Transparent"
+                   Placeholder="Search for a movie"
+                   PlaceholderColor="{StaticResource PlaceHoldersColor}"/>
+            <ListView Grid.Row="1" Footer="" IsRefreshing="{Binding IsBusy}"
+                      ItemsSource="{Binding MovieList}" HasUnevenRows="true"
+                      SelectedItem="{Binding SelectedMovie}" ItemSelected="Handle_ItemSelected" 
+                      IsPullToRefreshEnabled="true"
+                      RefreshCommand="{Binding RefreshDataCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="5,10" ColumnSpacing="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Grid.RowSpan="3" HeightRequest="100" WidthRequest="100" 
+                                       Source="{Binding Poster}" Aspect="AspectFit"/>
+                                <Label Grid.Row="0" Grid.Column="1" StyleClass="ListTitleLabel" Text="{Binding Title}"/>
+                                <Label Grid.Row="1" Grid.Column="1" StyleClass="ListInfoLabel" Text="{Binding Type}"/>
+                                <Label Grid.Row="2" Grid.Column="1" StyleClass="ListInfoLabel" Text="{Binding Year}"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

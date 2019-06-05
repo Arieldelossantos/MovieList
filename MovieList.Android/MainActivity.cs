@@ -23,6 +23,7 @@ namespace MovieList.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Android.Glide.Forms.Init();
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));
         }

@@ -66,6 +66,12 @@
         <PackageReference Include="Prism.Unity.Forms">
           <Version>7.0.0.396</Version>
         </PackageReference>
+        <PackageReference Include="Newtonsoft.Json">
+          <Version>12.0.2</Version>
+        </PackageReference>
+        <PackageReference Include="glidex.forms">
+          <Version>1.0.4</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="MainActivity.cs" />
